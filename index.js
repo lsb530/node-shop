@@ -31,13 +31,6 @@ var users = [
     }
 ];
 
-app.use(function(req, res, next) {
-    console.log('첫 번째 미들웨어 호출됨');
-    res.writeHead('200', {'Content-Type' : 'text/html;charset=utf8'});
-    res.write('접속성공! 그리고 변경 완료...ㅎㅎ');
-    res.end();
-});
-
 // 라우팅 함수 등록
 router.route('/process/login').post(function(req, res) {
     console.log('/process/login 처리함.');
@@ -58,8 +51,6 @@ app.get('/api/users', function(req, res) {
     res.write('hello'+users);
     res.end();
 });
-
-
 
 //=====404 오류 페이지 처리=====//
 var errorHandler = expressErrorHandler({

@@ -19,7 +19,7 @@ app.use(expressSession({
 app.use(function(req, res, next) {
     console.log('첫 번째 미들웨어 호출됨');
     res.writeHead('200', {'Content-Type' : 'text/html;charset=utf8'});
-    res.write('접속성공!');
+    res.write('접속성공! 그리고 변경 완료...ㅎㅎ');
     res.end();
 });
 

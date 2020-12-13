@@ -15,7 +15,7 @@ app.use(expressSession({
     resave:true,
     saveUninitialized:true
 }));
-
+var router = express.Router();
 var users = [
     {
         id: 1,
@@ -38,13 +38,28 @@ app.use(function(req, res, next) {
     res.end();
 });
 
+// 라우팅 함수 등록
+router.route('/process/login').post(function(req, res) {
+    console.log('/process/login 처리함.');
+    
+    var paramId = req.body.id || req.query.id; // get방식일때랑 post방식일때 둘다 처리
+    var paramPassword = req.body.password || req.query.password;
+    
+    res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+    res.write('<h1>Express 서버에서 응답한 결과입니다.</h1>');
+    res.write('<div><p>Param Id : ' + paramId + '</p></div>');
+    res.write('<div><p>Param password : ' + paramPassword + '</p></div>');
+    res.write("<br><br><a href='/public/login2.html'>로그인 페이지로 돌아가기</a>");
+    res.end();
+});
+
 app.get('/api/users', function(req, res) {
     res.writeHead('200', {'Content-Type' : 'text/html;charset=utf8'});
     res.write('hello'+users);
     res.end();
 });
 
-var router = express.Router();
+
 
 //=====404 오류 페이지 처리=====//
 var errorHandler = expressErrorHandler({

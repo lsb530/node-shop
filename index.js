@@ -4,7 +4,6 @@ var bodyParser = require('body-parser'), cookieParser = require('cookie-parser')
 var expressErrorHandler = require('express-error-handler');
 var expressSession = require('express-session');
 var app = express();
-var router = express.Router();
 
 app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({extended: false}));
@@ -17,6 +16,8 @@ app.use(expressSession({
     resave:true,
     saveUninitialized:true
 }));
+
+var router = express.Router();
 
 // 라우팅 함수 등록
 router.route('/process/login').post(function(req, res) {

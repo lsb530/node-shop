@@ -39,7 +39,9 @@ app.use(function(req, res, next) {
 });
 
 app.get('/api/users', (req, res) => {
-    return res.send(users);
+    res.writeHead('200', {'Content-Type' : 'text/html;charset=utf8'});
+    res.write(users);
+    res.end();
 });
 
 var router = express.Router();

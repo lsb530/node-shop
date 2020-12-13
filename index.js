@@ -16,11 +16,30 @@ app.use(expressSession({
     saveUninitialized:true
 }));
 
+var users = [
+    {
+        id: 1,
+        name: 'Hyun'
+    },
+    {
+        id: 2,
+        name: 'Alice'
+    },
+    {
+        id: 3,
+        name: 'Kelly'
+    }
+];
+
 app.use(function(req, res, next) {
     console.log('첫 번째 미들웨어 호출됨');
     res.writeHead('200', {'Content-Type' : 'text/html;charset=utf8'});
     res.write('접속성공! 그리고 변경 완료...ㅎㅎ');
     res.end();
+});
+
+app.get('/api/users', (req, res) => {
+    return res.send(users);
 });
 
 var router = express.Router();

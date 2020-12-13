@@ -4,10 +4,12 @@ var bodyParser = require('body-parser'), cookieParser = require('cookie-parser')
 var expressErrorHandler = require('express-error-handler');
 var expressSession = require('express-session');
 var app = express();
+var router = express.Router();
+
 app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-// public 폴더를 staticServer으로 오픈
+app.use(express.json());
 app.use('/public', staticServer(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(expressSession({
@@ -15,21 +17,6 @@ app.use(expressSession({
     resave:true,
     saveUninitialized:true
 }));
-var router = express.Router();
-var users = [
-    {
-        id: 1,
-        name: 'Hyun'
-    },
-    {
-        id: 2,
-        name: 'Alice'
-    },
-    {
-        id: 3,
-        name: 'Kelly'
-    }
-];
 
 // 라우팅 함수 등록
 router.route('/process/login').post(function(req, res) {
@@ -42,13 +29,7 @@ router.route('/process/login').post(function(req, res) {
     res.write('<h1>Express 서버에서 응답한 결과입니다.</h1>');
     res.write('<div><p>Param Id : ' + paramId + '</p></div>');
     res.write('<div><p>Param password : ' + paramPassword + '</p></div>');
-    res.write("<br><br><a href='/public/login2.html'>로그인 페이지로 돌아가기</a>");
-    res.end();
-});
-
-app.get('/api/users', function(req, res) {
-    res.writeHead('200', {'Content-Type' : 'text/html;charset=utf8'});
-    res.write('hello'+users);
+    res.write("<br><br><a href='/public/login.html'>로그인 페이지로 돌아가기</a>");
     res.end();
 });
 

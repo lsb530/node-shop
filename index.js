@@ -38,9 +38,9 @@ app.use(function(req, res, next) {
     res.end();
 });
 
-app.get('/api/users', (req, res) => {
+app.get('/api/users', function(req, res) {
     res.writeHead('200', {'Content-Type' : 'text/html;charset=utf8'});
-    res.write(users);
+    res.write('hello'+users);
     res.end();
 });
 

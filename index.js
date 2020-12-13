@@ -35,13 +35,13 @@ router.route('/process/login').post(function(req, res) {
 });
 
 //=====404 오류 페이지 처리=====//
-var errorHandler = expressErrorHandler({
-    static: {
-        '404': './public/404.html'
-    }
-});
-app.use(expressErrorHandler.httpError(404));
-app.use(errorHandler);
+//var errorHandler = expressErrorHandler({
+//    static: {
+//        '404': './public/404.html'
+//    }
+//});
+//app.use(expressErrorHandler.httpError(404));
+//app.use(errorHandler);
 app.use('/', router);
 
 //===== 서버 시작 =====//

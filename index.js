@@ -34,6 +34,12 @@ router.route('/process/login').post(function(req, res) {
     res.end();
 });
 
+router.route('/').get(function(req, res) {
+    res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+    res.write('<h1>감사합니다 사윤님!</h1>');
+    res.end();
+});
+
 //=====404 오류 페이지 처리=====//
 //var errorHandler = expressErrorHandler({
 //    static: {
@@ -46,5 +52,5 @@ app.use('/', router);
 
 //===== 서버 시작 =====//
 http.createServer(app).listen(app.get('port'), function(req, res) {
-    console.log('서버가 시작되었습니다. 포트 : ' + app.get('port')); 
+    console.log('서버가 시작되었습니다. 포트 : ' + app.get('port'));
 });

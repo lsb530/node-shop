@@ -34,6 +34,20 @@ router.route('/process/login').post(function(req, res) {
     res.end();
 });
 
+router.route('/api/clothes').get(function(req, res) {
+    console.log('전체 옷 api 호출');
+    const jdata_dog = [
+    {"name": "식빵", "family": "웰시코기", "age": 1, "weight": 2.14},
+    {"name": "콩콩", "family": "포메라니안", "age": 3, "weight": 2.5},
+    {"name": "젤리", "family": "푸들", "age": 7, "weight": 3.1}
+    ];
+    
+    res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+    res.write('<h1>강아지 데이터입니다 ㅋㅋ</h1>');
+    res.write(JSON.stringify(jdata_dog));
+    res.end();
+});
+
 router.route('/').get(function(req, res) {
     res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
     res.write('<h1>웹 개발 API서버!</h1>');

@@ -36,7 +36,7 @@ router.route('/process/login').post(function(req, res) {
 
 router.route('/').get(function(req, res) {
     res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-    res.write('<h1>감사합니다 사윤님!</h1>');
+    res.write('<h1>웹 개발 API서버!</h1>');
     res.end();
 });
 

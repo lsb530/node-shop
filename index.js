@@ -4,8 +4,9 @@ var bodyParser = require('body-parser'), cookieParser = require('cookie-parser')
 var expressErrorHandler = require('express-error-handler');
 var expressSession = require('express-session');
 var app = express();
+app.use(express.json());
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3080);
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(express.json());
@@ -36,6 +37,9 @@ router.route('/process/login').post(function(req, res) {
 
 router.route('/api/clothes').get(function(req, res) {
     console.log('전체 옷 api 호출');
+    
+    //res.redirect('리액트배포경로');
+    
     const jdata_dog = [
     {"name": "식빵", "family": "웰시코기", "age": 1, "weight": 2.14},
     {"name": "콩콩", "family": "포메라니안", "age": 3, "weight": 2.5},
@@ -48,9 +52,39 @@ router.route('/api/clothes').get(function(req, res) {
     res.end();
 });
 
+router.route('/api').post(function(req, res) {
+   var name = req.body.name|| req.query.id;
+    var pw = '비밀번호';
+    console.log(name);
+    console.log('탐정이죠');
+    
+    //응답
+    res.writeHead(200,{"Content-Type":"text/html; charset=utf-8"});
+    
+    //DOM
+    res.write("<!DOCTYPE html>");
+    res.write("<html>");
+    res.write("<head>");
+    res.write("    <title>Me server</title>");
+    res.write("    <meta charset='UTF-8'>");
+    res.write("    <meta name='description'' content=''>");
+    res.write("    <meta name='keywords' content=''>");
+    res.write("</head>");
+    res.write("<body>");
+    res.write("<div>안녕하세요</div>");
+    res.write("<div>NodeJS 실습 시간입니다.</div>");
+    res.write("</body>");
+    res.write("</html>");
+    
+    //응답 종료
+    res.end();
+});
+
 router.route('/').get(function(req, res) {
     res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
     res.write('<h1>웹 개발 API서버!</h1>');
+    //제가 생각한 원래 방식: node와 react를 한 프로젝트 경로에 합친다.
+//    res.redirect('리액트 주소'); // 돌아가는 방식: 배포한 리액트 주소경로
     res.end();
 });
 

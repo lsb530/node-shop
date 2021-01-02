@@ -1,6 +1,14 @@
 var express = require('express'), http = require('http'), path = require('path');
 var bodyParser = require('body-parser'), cookieParser = require('cookie-parser'),
     staticServer = require('serve-static'), errorHandler = require('errorhandler');
+var mysql = require('mysql');
+mysql://b3ed6a16f0a180:23e0e9f3@us-cdbr-east-02.cleardb.com/heroku_95d78f19fd2d409?reconnect=true
+var connection = mysql.createConnection({
+  host     : 'us-cdbr-east-02.cleardb.com',
+  user     : 'b3ed6a16f0a180',
+  password : '23e0e9f3',
+  database : 'heroku_95d78f19fd2d409'
+});
 var expressErrorHandler = require('express-error-handler');
 var expressSession = require('express-session');
 var app = express();
@@ -86,6 +94,16 @@ router.route('/').get(function(req, res) {
     //제가 생각한 원래 방식: node와 react를 한 프로젝트 경로에 합친다.
 //    res.redirect('리액트 주소'); // 돌아가는 방식: 배포한 리액트 주소경로
     res.end();
+});
+
+router.route('/db').get(function(req, res) {
+   connection.query('SELECT * from test', function(err, rows, fields) {
+      if (err) {
+        console.log('error: ', err);
+        throw err;
+      }
+      res.send(['DB test!!!!', rows]);
+    }); 
 });
 
 //=====404 오류 페이지 처리=====//
